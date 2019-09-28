@@ -1,6 +1,6 @@
 pipeline {
 
-    properties {
+    options {
         disableConcurrentBuilds()
     }
 
