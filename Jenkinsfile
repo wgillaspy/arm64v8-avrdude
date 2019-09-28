@@ -12,8 +12,10 @@ pipeline {
            steps {
               script {
 
+                  sh "nslookup docker.pkg.github.com"
+
                   withCredentials([usernamePassword(credentialsId: 'GITHUBUSER_TOKENPASS', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                      sh "echo $PASS | docker login docker.pkg.github.com --username $USER --password-stdin"
+                      sh "echo $PASS | docker login https://docker.pkg.github.com --username $USER --password-stdin"
                   }
 
                   sh "docker build . -t docker.pkg.github.com/wgillaspy/arm64v8-avrdude:latest"
