@@ -1,7 +1,7 @@
 mkdir /tmp/arduino_build
 mkdir /tmp/arduino_cache
 
-./arduino-builder \
+/arduino-1.8.10/arduino-builder \
   -compile \
   -logger=machine \
   -hardware /arduino-1.8.10/hardware   \
