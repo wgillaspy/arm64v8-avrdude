@@ -20,6 +20,6 @@ mkdir /tmp/arduino_cache
   -prefs=runtime.tools.avr-gcc-7.3.0-atmel3.6.1-arduino5.path=/arduino-1.8.10/hardware/tools/avr   \
   -prefs=runtime.tools.arduinoOTA.path=/arduino-1.8.10/hardware/tools/avr   \
   -prefs=runtime.tools.arduinoOTA-1.3.0.path=/arduino-1.8.10/hardware/tools/avr   \
-  -verbose ${1}
+  -verbose /usr/app/${1}
 
-/arduino-1.8.10/hardware/tools/avr/hardware/tools/avr/bin/avrdude -C/arduino-1.8.10/hardware/tools/avr/hardware/tools/avr/etc/avrdude.conf -v -patmega328p -carduino -P${2} -b57600 -D -Uflash:w:/tmp/arduino_build/${1}.hex:i
+/arduino-1.8.10/hardware/tools/avr/bin/avrdude -C/arduino-1.8.10/hardware/tools/avr/etc/avrdude.conf -v -patmega328p -carduino -P${2} -b57600 -D -Uflash:w:/tmp/arduino_build/${1}.hex:i
