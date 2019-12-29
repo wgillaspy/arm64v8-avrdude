@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 mkdir /tmp/arduino_build
 mkdir /tmp/arduino_cache
 
