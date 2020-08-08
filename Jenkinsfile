@@ -9,6 +9,8 @@ pipeline {
     environment {
         IMAGE = "docker.pkg.github.com/wgillaspy/arm64v8-avrdude/arm64v8-avrdude"
         TAG = "uno"
+        ARDUINO_DOWNLOAD_FILENAME = "arduino-1.8.10-linuxaarch64.tar.xz"
+        ARDUINO_DOWNLOAD = "https://downloads.arduino.cc/arduino-1.8.10-linuxaarch64.tar.xz"
     }
 
     stages {
@@ -17,6 +19,12 @@ pipeline {
             steps {
                 script {
 
+                    if (fileExists(ARDUINO_DOWNLOAD_FILENAME)) {
+                        println "Arduino already downloaded."
+                    } else {
+                        sh "wget ${ARDUINO_DOWNLOAD}"
+                    }
+
                     withCredentials([usernamePassword(credentialsId: 'GITHUBUSER_TOKENPASS', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
 
                         sh """
@@ -24,8 +32,6 @@ pipeline {
                            unset DOCKER_TLS_VERIFY
                            
                            docker login docker.pkg.github.com -u ${USER} -p ${PASS}
-                           
-                           wget https://downloads.arduino.cc/arduino-1.8.10-linuxaarch64.tar.xz
     
                            unxz arduino-1.8.10-linuxaarch64.tar.xz
                            tar xvf arduino-1.8.10-linuxaarch64.tar
@@ -34,7 +40,6 @@ pipeline {
                            docker push ${IMAGE}:${TAG}
                         """
                     }
-
 
                 }
             }
