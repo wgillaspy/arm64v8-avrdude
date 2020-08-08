@@ -10,7 +10,7 @@ mkdir /tmp/arduino_cache
   -tools /arduino-1.8.10/tools-builder \
   -tools /arduino-1.8.10/hardware/tools/avr   \
   -built-in-libraries /arduino-1.8.10/libraries   \
-  -fqbn=arduino:avr:pro:cpu=16MHzatmega328   \
+  -fqbn=arduino:avr:uno   \
   -ide-version=10810  \
   -build-path /tmp/arduino_build   \
   -warnings=all   \
@@ -24,4 +24,4 @@ mkdir /tmp/arduino_cache
   -prefs=runtime.tools.arduinoOTA-1.3.0.path=/arduino-1.8.10/hardware/tools/avr   \
   -verbose /usr/app/${1}
 
-/arduino-1.8.10/hardware/tools/avr/bin/avrdude -C/arduino-1.8.10/hardware/tools/avr/etc/avrdude.conf -v -patmega328p -carduino -P${2} -b57600 -D -Uflash:w:/tmp/arduino_build/${1}.hex:i
+/arduino-1.8.10/hardware/tools/avr/bin/avrdude -C/arduino-1.8.10/hardware/tools/avr/etc/avrdude.conf -v -patmega328p -carduino -P${2} -b115200 -D -Uflash:w:/tmp/arduino_build/${1}.hex:i
