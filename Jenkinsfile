@@ -35,10 +35,6 @@ pipeline {
                            unset DOCKER_TLS_VERIFY
                            
                            docker login docker.pkg.github.com -u ${USER} -p ${PASS}
-    
-                           
-                           tar xvf arduino-1.8.10-linuxaarch64.tar
-    
                            docker build . -t ${IMAGE}:${TAG}
                            docker push ${IMAGE}:${TAG}
                         """
