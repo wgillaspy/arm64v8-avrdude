@@ -22,7 +22,10 @@ pipeline {
                     if (fileExists(ARDUINO_DOWNLOAD_FILENAME)) {
                         println "Arduino already downloaded."
                     } else {
-                        sh "wget ${ARDUINO_DOWNLOAD}"
+                        sh """
+                           wget ${ARDUINO_DOWNLOAD}
+                           unxz arduino-1.8.10-linuxaarch64.tar.xz
+                        """
                     }
 
                     withCredentials([usernamePassword(credentialsId: 'GITHUBUSER_TOKENPASS', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
@@ -33,7 +36,7 @@ pipeline {
                            
                            docker login docker.pkg.github.com -u ${USER} -p ${PASS}
     
-                           unxz arduino-1.8.10-linuxaarch64.tar.xz
+                           
                            tar xvf arduino-1.8.10-linuxaarch64.tar
     
                            docker build . -t ${IMAGE}:${TAG}
