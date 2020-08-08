@@ -6,15 +6,9 @@ pipeline {
 
     agent { label 'jenkins-bc-did' }
 
-    options {
-        disableConcurrentBuilds()
-    }
-
     environment {
-
         IMAGE="docker.pkg.github.com/wgillaspy/arm64v8-avrdude/arm64v8-avrdude"
         TAG="uno"
-
     }
 
     stages {
